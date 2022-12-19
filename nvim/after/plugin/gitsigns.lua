@@ -3,19 +3,6 @@ if not present then
   return
 end
 
-require "colorbuddy"
-
-local c = require("colorbuddy.color").colors
-local Group = require("colorbuddy.group").Group
-
-Group.new("GitSignsAdd", c.green)
-Group.new("GitSignsChange", c.yellow)
-Group.new("GitSignsDelete", c.red)
-
-if true then
-  return
-end
-
 signs.setup {
   signs = {
     add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr" },
@@ -25,8 +12,10 @@ signs.setup {
     changedelete = { hl = "GitSignsDelete", text = "~", numhl = "GitSignsChangeNr" },
   },
 
+  signcolumn = true,
+
   -- highlight just the number part of the number column
-  numhl = true,
+  numhl = false,
 
   -- highlights the _whole_ line
   -- instead, use gitsigns.toggle_linehl()
@@ -43,10 +32,5 @@ signs.setup {
 
     ["n <space>hd"] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<cr>'" },
     ["n <space>hu"] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<cr>'" },
-  },
-
-  current_line_blame_opts = {
-    delay = 2000,
-    virt_text_pos = "eol",
   },
 }

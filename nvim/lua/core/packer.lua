@@ -74,7 +74,6 @@ return require("packer").startup(function(use)
 
     -- gitsigns
     use("lewis6991/gitsigns.nvim")
-    use("tjdevries/colorbuddy.nvim")
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()
