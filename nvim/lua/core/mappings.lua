@@ -3,6 +3,7 @@ local map = vim.keymap.set
 vim.g.mapleader = " "
 
 map("n", "x", '"_x')
+map("n", "<leader>e", "<cmd>Lex<cr>", { silent = true })
 
 -- copy & paste to/from systemclipboard ('+' register)
 map({ "n", "v" }, "<leader>y", [["+y]])
