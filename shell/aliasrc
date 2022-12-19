@@ -1,0 +1,57 @@
+## ALIASES  -------------------------------------- ##
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ip='ip --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# changing 'ls' to 'lsd'
+alias ls='lsd'
+alias l='ls -lh'
+alias ll='ls -lAh'
+alias la='ls -A'
+alias lm='ls -m'
+alias lr='ls -R'
+alias lg='ls -l --group-dirs first'
+
+alias df='df -h'
+alias du='du -h'
+alias rm='trash-put'
+alias cp='cp -iv'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias free='free -m'
+alias tsr='transmission-remote'
+alias ping='ping -c 4'
+
+alias cat='batcat --plain'
+alias bconf="vim ~/.bashrc"
+
+# git
+alias addup='git add -u'
+alias checkout='git checkout'
+alias ga='git add'
+alias gall='git add .'
+alias gc='git commit -m'
+alias gcl='git clone'
+alias gf='git fetch'
+alias gi='git init'
+alias gp='git push'
+
+## FUNCTIONS  -------------------------------------- ##
+yt-vid() {
+    yt-dlp -f "best[height>=720]" -o '/media/xarc/Backup/videos/%(title)s.%(ext)s' $*
+}
+
+yt-vid1() {
+    yt-dlp -f "best[height>=720]" -o '%(title)s.%(ext)s' $*
+}
+
+yt-aud() {
+    yt-dlp -f 'ba' -x --audio-format mp3 -o '/media/xarc/Backup/music/%(title)s.%(ext)s' $*
+}
