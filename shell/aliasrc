@@ -33,15 +33,15 @@ alias cat='batcat --plain'
 alias bconf="vim ~/.bashrc"
 
 # git
-alias addup='git add -u'
-alias checkout='git checkout'
-alias ga='git add'
-alias gall='git add .'
-alias gc='git commit -m'
-alias gcl='git clone'
-alias gf='git fetch'
-alias gi='git init'
-alias gp='git push'
+# alias addup='git add -u'
+# alias checkout='git checkout'
+# alias ga='git add'
+# alias gall='git add .'
+# alias gc='git commit -m'
+# alias gcl='git clone'
+# alias gf='git fetch'
+# alias gi='git init'
+# alias gp='git push'
 
 ## FUNCTIONS  -------------------------------------- ##
 yt-vid() {
