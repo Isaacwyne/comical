@@ -25,6 +25,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 })
 
 -- disable completion with tab
+cmp_mappings['<CR>'] = nil
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab'] = nil
 
