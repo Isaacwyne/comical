@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+## policykit ---------------------------------------------------##
+if [[ ! `pidof lxpolkit` ]]; then
+    /usr/bin/lxpolkit &
+fi
+
+## ksuperkey ---------------------------------------------------##
+if [[ ! `pidof ksuperkey` ]]; then
+    ksuperkey &
+fi
+
+## dunst -------------------------------------------------------##
+# (notification daemon)
+if [[ `pidof dunst` ]]; then
+    pkill dunst
+fi
+dunst &
+
+## transmission ------------------------------------------------##
+if [[ `pidof transmission-daemon` ]]; then
+    killall transmission-daemon
+fi
+transmission-daemon &
+
+## start picom ---------------------------------------------------##
+# terminate pre-running instances
+kill -q picom
+
+# wait until the instances are dead
+while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
+picom -b --experimental-backends &
