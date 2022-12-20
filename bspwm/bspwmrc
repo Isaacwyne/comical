@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+# add the bspwm `bin` directory to PATH
+export PATH="${PATH}:$HOME/.config/bspwm/bin"
+
+## Configurations --------------------------------------------#
+# truncate a couple of common commands
+_bc() {
+    bspc config "$@"
+}
+
+## manage workspaces
+workspaces() {
+    name=1
+    for monitor in `bspc query -M`; do
+        bspc monitor ${monitor} -n "$name" -d '' '' '' '' '' '' '' '' ''
+        let name++
+    done
+}
+workspaces
+
+## apply bspwm configurations
+_bc border_width 1
+_bc window_gap 4
+_bc split_ratio 0.50
+
+_bc borderless_monocle true
+_bc click_to_focus any
+_bc focus_follows_pointer true
+_bc gapless_monocle false
+_bc paddless_monocle false
+_bc pointer_follows_monitor true
+_bc single_monocle false
+_bc swallow_first_click false
+
+# coloring
+_bc focused_border_color "#61AFEF"
+_bc normal_border_color "#282C34"
+_bc active_border_color "#C678DD"
+_bc presel_feedback_color "#98C379"
+
+## manage all the unmanaged windows remaining from a previous session
+bspc wm --adopt-orphans
+
+## Window rules ----------------------------------------------#
+# remove all rules first
+bspc rule -r *:*
+
+## 2> web
+bspc rule -a Brave-browser desktop='^2' follow=on focus=on
+
+## 3> filemanagers
+bspc rule -a Pcmanfm desktop='^3' follow=on focus=on
+
+## 5> office
+declare -a office=(Zathura Artha)
+for i in ${office[@]}; do
+    bspc rule -a $i desktop='^5' follow=on focus=on; done
+
+## 6> chat
+declare -a chat=(TelegramDesktop)
+for i in ${chat[@]}; do
+    bspc rule -a $i desktop='^6' follow=on focus=on; done
+
+## 7> music
+declare -a music=(com.github.neithern.g4music)
+for i in ${music[@]}; do
+    bspc rule -a $i desktop='^7' follow=on focus=on; done
+
+## 8> video
+declare -a video=(MPlayer mpv obs)
+for i in ${video[@]}; do
+    bspc rule -a $i desktop='^8' follow=on focus=on; done
+
+## always floating programs
+declare -a float=(alacritty-float Pcmanfm Zathura Artha Sxiv Nsxiv \
+com.github.neithern.g4music)
+for i in ${float[@]}; do
+    bspc rule -a $i state=floating; done
+
+## Autostart ----------------------------------------------#
+
+# kill if already running
+killall -9 sxhkd bspc xsettingsd
+
+# polybar
+$HOME/.config/polybar/launch.sh
+
+# launch xsettingsd daemon
+xsettingsd --config=$HOME/.config/bspwm/xsettingsd &
+
+#launch keybindings daemon
+sxhkd -c $HOME/.config/bspwm/sxhkdrc &
+
+# fix cursor
+xsetroot -cursor_name left_ptr
+
+# set wallpaper
+feh --no-fehbg --bg-fill '/home/xarc/.config/wallpaper'
+
+# autostart script
+autostart
+
+# enable superkeys for menus
+ksuperkey -e 'Super_L=Alt_L|F1' &
+ksuperkey -e 'Super_R=Alt_L|F1' &
