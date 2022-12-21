@@ -65,6 +65,8 @@ super + {h,j,k,l}
 super + shift + {h,j,k,l}
     bspc node -s {west,south,north,east}
 
+# This is to change because it only works on tiled windows
+# and that ain't that helpful :(
 # resizing nodes
 super + ctrl + {h,j,k,l}
     bspwm_resize {west,south,north,east}
