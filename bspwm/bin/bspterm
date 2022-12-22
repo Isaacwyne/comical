@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "--float" ]; then
+    alacritty --class 'alacritty-float,alacritty-float'
+else
+    alacritty
+fi
