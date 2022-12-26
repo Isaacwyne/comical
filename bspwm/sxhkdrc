@@ -92,10 +92,6 @@ super + a ; {l,m,s,p}
 super + b
     bspc node -s biggest.local
 
-# switch workspace/desktop
-ctrl + alt + {h,l}
-    bspc desktop -f {prev.local,next.local}
-
 # make node splits ratios equal or balanced.
 super + w ; e
     bspc node @/ --equalize
