@@ -15,7 +15,7 @@ color.setup {
   -- you can configure multiple styles with comma separation
   code_style = {
     comments = 'italic',
-    keywords = 'bold,italic',
+    keywords = 'italic,bold',
     functions = 'bold',
     strings = 'italic',
     variables = 'none',
