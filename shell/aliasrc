@@ -1,6 +1,7 @@
 ## ALIASES  -------------------------------------- ##
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r ~/.config/shell/dircolors && eval "$(dircolors -b ~/.config/shell/dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
     alias ip='ip --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
@@ -11,7 +12,6 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # changing 'ls' to 'lsd'
-alias ls='lsd'
 alias l='ls -lh'
 alias ll='ls -lAh'
 alias la='ls -A'
