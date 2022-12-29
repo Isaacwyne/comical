@@ -7,9 +7,14 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
   'bashls',
+  'cssls',
+  'eslint',
+  'html',
   'pylsp',
   'rust_analyzer',
   'sumneko_lua',
+  'tsserver',
+  'vimls',
 })
 
 local present, cmp = pcall(require, "cmp")
