@@ -6,7 +6,7 @@ end
 lualine.setup {
   options = {
     icons_enabled = true,
-    theme = "onedark",
+    theme = "auto",
     section_separators = "",
     component_separators = "",
     disabled_filetypes = {

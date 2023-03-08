@@ -29,8 +29,7 @@ return require('packer').startup(function(use)
   use "wbthomason/packer.nvim"
   use "kyazdani42/nvim-web-devicons"
   use "windwp/nvim-autopairs"
-  -- use "navarasu/onedark.nvim"
-  use "rebelot/kanagawa.nvim"
+  use "navarasu/onedark.nvim"
   use "nvim-lualine/lualine.nvim"
 
   if PACKER_BOOTSTRAP then
