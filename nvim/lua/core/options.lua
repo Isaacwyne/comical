@@ -1,20 +1,32 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local opt = vim.opt
 
 local options = {
-  showmode = true,
-  hlsearch = false,
+  conceallevel = 3,
+  confirm = true,
   cursorline = true,
+  formatoptions = "jcroqlnt",
+  grepformat = "%f:%l:%c:%m",
+  grepprg = "rg --vimgrep",
+  hlsearch = false,
+  laststatus = 0,
+  showmode = false,
+  winminwidth = 5,
+  wrap = false,
 
   title = true,
 
   -- highlights
-  -- termguicolors = true,
+  termguicolors = true,
 
   -- indenting
   breakindent = true,
   cindent = true,
   expandtab = true,
   linebreak = true,
+  shiftround = true,
   shiftwidth = 4,
   smartindent = true,
   softtabstop = 4,
@@ -26,7 +38,6 @@ local options = {
   mouse = "i",
   smartcase = true,
   swapfile = false,
-  wrap = true,
 
   -- Numbers
   number = true,
@@ -43,20 +54,24 @@ local options = {
   splitright = true,
   timeoutlen = 400,
   undofile = true,
-  updatetime = 50,
+  undolevels = 10000,
+  updatetime = 200,
 
   list = true,
   shell = "bash",
+  spelllang = { "en" },
 
   -- cool floating window popup menu for completion on the commandline
-  pumblend = 17,
-  wildmode = "longest:full",
+  pumblend = 10,
+  pumheight = 10,
+  wildmode = "longest:full,full",     -- commandline completion mode
   wildoptions = "pum",
 }
 for k, v in pairs(options) do
   opt[k] = v
 end
 
+opt.completeopt = "menu,menuone,noselect"
 opt.listchars:append("space:⋅,eol:,tab:» ,nbsp:␣")
 
 local default_providers = {
@@ -88,3 +103,6 @@ local default_plugins = {
 for _, plugin in pairs(default_plugins) do
   vim.g["loaded_" .. plugin] = 1
 end
+
+-- fix markdown indentation settings
+vim.g.markdown_recommended_style = 0

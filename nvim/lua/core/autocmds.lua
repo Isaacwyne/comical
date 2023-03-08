@@ -15,6 +15,18 @@ autocmd("TextYankPost", {
   end,
 })
 
+-- don't auto comment newlines
+autocmd("BufEnter", {
+  group = augroup("auto_comment"),
+  command = "set fo-=c fo-=r fo-=o",
+})
+
+-- auto-remove trailing whitespace
+autocmd("BufWritePre", {
+  group = augroup("whitespace"),
+  command = "%s/\\s\\+$//e",
+})
+
 -- go to the last location when opening a buffer
 autocmd("BufReadPost", {
   group = augroup("last_loc"),
@@ -24,6 +36,20 @@ autocmd("BufReadPost", {
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
+  end,
+})
+
+-- close some filetypes with <q>
+autocmd("Filetype", {
+  group = augroup("close_with_q"),
+  pattern = {
+    "help",
+    "lspinfo",
+    "man",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
 
