@@ -8,8 +8,6 @@ local options = {
   confirm = true,
   cursorline = true,
   formatoptions = "jcroqlnt",
-  grepformat = "%f:%l:%c:%m",
-  grepprg = "rg --vimgrep",
   hlsearch = false,
   laststatus = 0,
   showmode = false,
@@ -73,6 +71,12 @@ end
 
 opt.completeopt = "menu,menuone,noselect"
 opt.listchars:append("space:⋅,eol:,tab:» ,nbsp:␣")
+
+if vim.fn.executable("rg") then
+  -- if ripgrep is installed, use that as grepper
+  opt.grepprg = "rg --vimgrep --no-heading"
+  opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+end
 
 local default_providers = {
   "node",
