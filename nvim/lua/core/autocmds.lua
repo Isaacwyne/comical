@@ -1,6 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 
-local function augroup(name)
+local augroup = function(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 

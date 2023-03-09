@@ -5,7 +5,8 @@ vim.cmd [[packadd packer.nvim]]
 vim.cmd([[
 augroup packer_user_config
 autocmd!
-autocmd BufWritePost packer.lua source <afile>
+" autocmd BufWritePost packer.lua source <afile>
+autocmd BufWritePost plugins.lua source <afile>
 augroup END
 ]])
 
@@ -47,6 +48,26 @@ return require('packer').startup(function(use)
       ts_update()
     end,
   })
+
+  -- lsp
+  use {
+    "neovim/nvim-lspconfig",
+    requires = {
+      {"williamboman/mason.nvim"},
+      {"onsails/lspkind.nvim"},
+
+      -- autocompletion
+      {"hrsh7th/nvim-cmp"},
+      {"hrsh7th/cmp-nvim-lua"},
+      {"hrsh7th/cmp-nvim-lsp"},
+      {"hrsh7th/cmp-buffer"},
+      {"hrsh7th/cmp-path"},
+
+      -- Snippets
+      {'L3MON4D3/LuaSnip'},
+      {'rafamadriz/friendly-snippets'},
+    },
+  }
 
   -- gitsigns
   use("lewis6991/gitsigns.nvim")
