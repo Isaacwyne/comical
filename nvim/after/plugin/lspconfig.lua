@@ -55,10 +55,10 @@ capabilities.textDocument.completion.completionItem = {
 }
 
 local signs = {
-  error = '✘',
-  warn = '',
-  hint = '',
-  info = ''
+  Error = '✘',
+  Warn = '',
+  Hint = '',
+  Info = ''
 }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
