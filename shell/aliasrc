@@ -17,41 +17,56 @@ alias ll='ls -lAh'
 alias la='ls -A'
 alias lm='ls -m'
 alias lr='ls -R'
-alias lg='ls -l --group-dirs first'
+alias lg='ls -l --group-directories-first'
 
 alias df='df -h'
 alias du='du -h'
-alias rm='trash-put'
 alias cp='cp -iv'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
 alias free='free -m'
-alias tsr='transmission-remote'
 alias ping='ping -c 4'
+alias trem='transmission-remote'
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
-alias cat='batcat --plain'
+alias cat='bat'
 alias bconf="vim ~/.bashrc"
 
-# git
-# alias addup='git add -u'
-# alias checkout='git checkout'
-# alias ga='git add'
-# alias gall='git add .'
-# alias gc='git commit -m'
-# alias gcl='git clone'
-# alias gf='git fetch'
-# alias gi='git init'
-# alias gp='git push'
+alias vv='vimv'
+alias cat='bat'
+alias bconf="vim ~/.bashrc"
 
 ## FUNCTIONS  -------------------------------------- ##
-yt-vid() {
-    yt-dlp -f "best[height>=720]" -o '/media/xarc/Backup/videos/%(title)s.%(ext)s' $*
+function ranger {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
 }
 
-yt-vid1() {
-    yt-dlp -f "best[height>=720]" -o '%(title)s.%(ext)s' $*
+vo() {
+    vim $(which $1)
 }
 
-yt-aud() {
-    yt-dlp -f 'ba' -x --audio-format mp3 -o '/media/xarc/Backup/music/%(title)s.%(ext)s' $*
+yta() {
+    yt-dlp --extract-audio --audio-format mp3 --audio-quality 10 -o '~/music/%(title)s.%(ext)s' $@
+}
+
+# FZF
+fo() {
+    IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
+    key=$(head -1 <<< "$out")
+    file=$(head -2 <<< "$out" | tail -1)
+    if [ -n "$file" ]; then
+        [ "$key" = ctrl-o ] && xdg-open "$file" || ${EDITOR:-vim} "$file"
+    fi
 }
