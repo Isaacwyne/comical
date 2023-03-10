@@ -70,7 +70,8 @@ for k, v in pairs(options) do
 end
 
 opt.completeopt = "menu,menuone,noselect"
-opt.listchars:append("space:⋅,eol:,tab:» ,nbsp:␣")
+-- opt.listchars:append("space:⋅,eol:,tab:» ,nbsp:␣")
+opt.listchars:append("eol:,tab:» ,nbsp:␣")
 
 if vim.fn.executable("rg") then
   -- if ripgrep is installed, use that as grepper
