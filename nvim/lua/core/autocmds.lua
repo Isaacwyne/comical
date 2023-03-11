@@ -57,6 +57,7 @@ autocmd("Filetype", {
 autocmd("Filetype", {
   group = augroup("wrap_spell"),
   pattern = {
+    "text",
     "gitcommit",
     "markdown"
   },

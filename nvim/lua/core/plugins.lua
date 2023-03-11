@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
   use "navarasu/onedark.nvim"
   use "numToStr/Comment.nvim"
   use "nvim-lualine/lualine.nvim"
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- telescope
   use {
