@@ -56,4 +56,6 @@ export FZF_DEFAULT_COMMAND='fd --type f --no-ignore --hidden --follow'
 source /usr/share/fzf/completion.bash
 source /usr/share/fzf/key-bindings.bash
 
-neofetch
+if [ "$TERM" == "alacritty" ]; then
+    neofetch
+fi
