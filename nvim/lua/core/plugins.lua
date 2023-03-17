@@ -1,59 +1,43 @@
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
-
--- autocmd that reloads neovim whenever you save the `packer.lua` file
-vim.cmd([[
-augroup packer_user_config
-autocmd!
-" autocmd BufWritePost packer.lua source <afile>
-autocmd BufWritePost plugins.lua source <afile>
-augroup END
-]])
-
--- use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",    -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- have packer use a popup menu
-packer.init({
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "rounded" })
-    end,
-  },
-})
-
-return require('packer').startup(function(use)
-  -- packer can manage itself
-  use "wbthomason/packer.nvim"
-  use "kyazdani42/nvim-web-devicons"
-  use "windwp/nvim-autopairs"
-  use "navarasu/onedark.nvim"
-  use "numToStr/Comment.nvim"
-  use "nvim-lualine/lualine.nvim"
-  use "lukas-reineke/indent-blankline.nvim"
+local plugins = {
+  "kyazdani42/nvim-web-devicons",
+  "windwp/nvim-autopairs",
+  "navarasu/onedark.nvim",
+  "numToStr/Comment.nvim",
+  "nvim-lualine/lualine.nvim",
+  "lukas-reineke/indent-blankline.nvim",
+  -- gitsigns
+  "lewis6991/gitsigns.nvim",
 
   -- telescope
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.1',
+    dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
 
   -- treesitter
-  use({
+  {
     "nvim-treesitter/nvim-treesitter",
-    run = function ()
-      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-      ts_update()
-    end,
-  })
+    build = ":TSUpdate"
+  },
 
   -- lsp
-  use {
+  {
     "neovim/nvim-lspconfig",
-    requires = {
+    dependencies = {
       {"williamboman/mason.nvim"},
       {"onsails/lspkind.nvim"},
 
@@ -69,11 +53,8 @@ return require('packer').startup(function(use)
       {'rafamadriz/friendly-snippets'},
     },
   }
+}
 
-  -- gitsigns
-  use("lewis6991/gitsigns.nvim")
+local opts = {}
 
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
-end)
+require("lazy").setup(plugins, opts)
