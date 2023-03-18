@@ -51,7 +51,10 @@ PS1='[\u@\h \W]\$ '
 eval "$(starship init bash)"
 
 # fzf
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse \
+    --prompt '∷ ' \
+    --pointer ▶ \
+    --marker ⇒"
 export FZF_DEFAULT_COMMAND='fd --type f --no-ignore --hidden --follow'
 source /usr/share/fzf/completion.bash
 source /usr/share/fzf/key-bindings.bash
