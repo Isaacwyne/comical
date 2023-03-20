@@ -36,6 +36,16 @@ alias vv='vimv'
 alias cat='bat'
 alias bconf="vim ~/.bashrc"
 
+# git
+alias ga='git add'
+alias gc='git clone'
+alias pull='git pull'
+alias push='git push'
+alias addup='git add --update'
+alias addall='git add --all'
+alias commit='git commit -m'
+alias status='git status'
+
 ## FUNCTIONS  -------------------------------------- ##
 function ranger {
     local IFS=$'\t\n'
