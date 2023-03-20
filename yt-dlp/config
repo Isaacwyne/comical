@@ -1,0 +1,8 @@
+--no-mtime
+--geo-bypass
+--progress
+--embed-thumbnail
+--embed-chapters
+--output '%(title)s.%(ext)s'
+--concurrent-fragments 5
+--merge-output-format mp4
