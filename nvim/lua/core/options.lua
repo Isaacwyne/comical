@@ -5,7 +5,7 @@ local opt = vim.opt
 
 local options = {
   conceallevel = 3,
-  confirm = true,
+  -- confirm = true,
   cursorline = true,
   formatoptions = "jcroqlnt",
   hlsearch = false,

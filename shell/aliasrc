@@ -39,6 +39,7 @@ alias bconf="vim ~/.bashrc"
 # git
 alias ga='git add'
 alias gc='git clone'
+alias gd='git diff'
 alias pull='git pull'
 alias push='git push'
 alias addup='git add --update'
