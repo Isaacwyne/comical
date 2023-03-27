@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [[ `pidof conky` ]]; then
-    pkill conky
-else
-    conky -c ~/dotfiles/conky/conky.lua
-fi
