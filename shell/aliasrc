@@ -85,7 +85,7 @@ fo() {
 ffvid() {
     if [ -n "$1" ]; then
         vid="$1"
-        ffmpeg -i "$vid" -f mp3 -vn -ac 2 quiet "${vid%.*}.mp3"
+        ffmpeg -i "$vid" -f mp3 -vn -ac 2 "${vid%.*}.mp3"
     else
         echo "Please supply a video file"
     fi
