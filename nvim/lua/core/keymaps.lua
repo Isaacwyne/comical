@@ -42,3 +42,6 @@ map("n", "<leader>fo", "<cmd>Telescope find_files<cr>", { silent = true })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { silent = true })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { silent = true })
 map("n", "<leader>ht", "<cmd>Telescope help_tags<cr>", { silent = true })
+
+-- Terminal
+map("t", "<Esc>", "<C-\\><C-n>", { silent = true })
