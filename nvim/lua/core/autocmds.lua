@@ -66,3 +66,12 @@ autocmd("Filetype", {
     vim.opt_local.spell = true
   end,
 })
+
+-- terminal options
+autocmd("TermOpen", {
+  group = augroup("terminal_opts"),
+  callback = function ()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+  end
+})
