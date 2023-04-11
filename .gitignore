@@ -1,3 +1,5 @@
 nvim/plugin/
 nvim/lazy-lock.json
 tmux/plugins/
+ranger/plugins/
+ranger/ranger_udisk_menu/

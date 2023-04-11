@@ -72,6 +72,10 @@ yta() {
     yt-dlp --extract-audio --audio-format mp3 --audio-quality 10 -o '~/music/%(title)s.%(ext)s' $@
 }
 
+ytv() {
+        yt-dlp $@
+}
+
 # FZF
 fo() {
     IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
