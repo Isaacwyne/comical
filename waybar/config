@@ -1,0 +1,47 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "height": 24,
+    "width": 1350,
+    "spacing": 4,
+    // choose the order of the modules
+    "modules-left": ["wlr/workspaces"],
+    "modules-right": ["memory", "battery", "clock"],
+
+    // modules configuration
+    "memory": {
+        "format": "󰍛 {used}GiB",
+        "interval": 3
+    },
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "sort-by-number": true
+    },
+    "battery": {
+        "bat": "BAT0",
+        "interval": 5,
+        "states": {
+            "warning": 15,
+            "critical": 5
+        },
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "max-length": 25
+    },
+    "clock": {
+        "format": " {:%H:%M}",
+        "format-alt": " {:%d-%m-%Y}",
+        "interval": 1
+    },
+}
