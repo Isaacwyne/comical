@@ -1,0 +1,42 @@
+## Wofi config
+
+# general
+show=drun
+prompt=Apps
+normal_window=true
+layer=top
+term=alacritty
+
+# Geometry
+width=700px
+height=500px
+location=0
+orientation=vertical
+halign=fill
+line_wrap=off
+dynamic_lines=false
+
+# images
+allow_markup=true
+allow_images=true
+image_size=24
+
+# search
+exec_search=false
+hide_search=false
+parse_search=false
+insensitive=false
+
+# other
+hide_scroll=true
+no_actions=true
+sort_order=default
+gtk_dark=true
+filter_rate=100
+
+
+# keys
+key_expand=Tab
+key_exit=Escape
+
+# vim:set ft=conf
