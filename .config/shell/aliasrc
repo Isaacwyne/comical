@@ -35,6 +35,7 @@ alias bconf="vim ~/.bashrc"
 alias vv='vimv'
 alias cat='bat'
 alias bconf="vim ~/.bashrc"
+alias zconf="vim ~/.config/zsh/.zshrc"
 
 # git
 alias ga='git add'

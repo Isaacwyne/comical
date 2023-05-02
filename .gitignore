@@ -3,4 +3,5 @@
 \.config/tmux/plugins/
 \.config/ranger/plugins/
 \.config/ranger/ranger_udisk_menu/
+\.config/zsh/\.histfile
 \.git

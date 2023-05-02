@@ -1,48 +1,37 @@
 * {
-    font-family: "Noto Sans";
-    font-size: 14px;
+    border-radius: 3px;
+    border: none;
 }
 
-#window {
-    background-color: --wofi-color0;
-    color: --wofi-color2
-    border: 1px solid --wofi-color1;
-    border-radius: 0px;
+window {
+    font-size: 14px;
+    font-family: "Roboto Mono Medium", sans-serif;
+    background-color: rgba(50, 50, 50, 0.9);
+    color: #ffffff;
+    /* border-bottom: 3px solid white; */
 }
-#outer-box {
-    padding: 20px;
+
+#entry{
+    padding: .25em;
+}
+
+#entry:selected {
+    background-color: #bbccdd;
+    background: linear-gradient(90deg, #bbccdd, #cca5dd);
+    color: #333333;
+}
+
+#text:selected {
+    color: #333333;
 }
 
 #input {
-    background-color: --wofi-color1;
-    border: 0px solid --wofi-color3;
-    padding: 4px 12px;
+    background-color: rgba(50, 50, 50, 0.5);
+    color: #ffffff;
+    padding: .25em;
 }
 
-#scroll {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#img {
-    padding-right: 8px;
-}
-
-#text {
-    color: --wofi-color2;
-}
-#text:selected {
-    color: --wofi-color0;
-}
-
-#entry {
-    padding: 6px;
-}
-#entry:selected {
-    background-color: --wofi-color3;
-    color: --wofi-color0;
-}
-
-#input, #entry:selected {
-    border-radius: 4px;
+image{
+    margin-left: .25em;
+    margin-right: .25em;
 }
