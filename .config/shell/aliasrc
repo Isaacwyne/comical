@@ -30,12 +30,10 @@ alias trem='transmission-remote'
 alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
 
 alias cat='bat'
-alias bconf="vim ~/.bashrc"
-
 alias vv='vimv'
 alias cat='bat'
-alias bconf="vim ~/.bashrc"
-alias zconf="vim ~/.config/zsh/.zshrc"
+alias bconf="nvim ~/.bashrc"
+alias zconf="nvim ~/.config/zsh/.zshrc"
 
 # git
 alias ga='git add'
@@ -70,7 +68,7 @@ vo() {
 }
 
 yta() {
-    yt-dlp --extract-audio --audio-format mp3 --audio-quality 10 -o '~/music/%(title)s.%(ext)s' $@
+    yt-dlp --extract-audio --audio-format mp3 --audio-quality 10 -o '~/Music/%(title)s.%(ext)s' $@
 }
 
 ytv() {
@@ -95,3 +93,5 @@ ffvid() {
         echo "Please supply a video file"
     fi
 }
+
+# vim:ft=bash

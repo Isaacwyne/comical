@@ -5,3 +5,4 @@
 \.config/ranger/ranger_udisk_menu/
 \.config/zsh/\.histfile
 \.git
+\.config/nvim/lazy-lock.json

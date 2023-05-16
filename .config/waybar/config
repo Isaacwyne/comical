@@ -1,8 +1,28 @@
 {
     "position": "top",
     "height": "30",
-    "modules-left": ["sway/workspaces"],
-    "modules-right": ["pulseaudio", "network", "backlight", "battery", "battery#bat2", "clock", "tray"],
+    "modules-left": ["wlr/workspaces"],
+    "modules-right": ["pulseaudio", "network", "backlight", "battery", "battery#bat2", "clock", "tray", "custom/power"],
+
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "all-outputs": true,
+        // "sort-by-number": true,
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "focused": "",
+            "default": ""
+        },
+    },
 
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -23,6 +43,7 @@
         },
         "on-click": "pavucontrol"
     },
+
     "network": {
         "format-wifi": "<span font='Font Awesome 6 Free Solid'></span> {essid} ({signalStrength}%)",
         "format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
@@ -30,10 +51,12 @@
         "format-disconnected": "Disconnected",
         "format-alt": "{ifname}: {ipaddr}"
     },
+
     "backlight": {
-        "format": "<span font='Font Awesome 6 Free Solid'>{icon}</span> {percent}%",
-        "format-icons": ["", ""]
+        "format": "<span font='Font Awesome 6 Free Solid'>{icon}</span> {percent}%",
+        // "format-icons": ["", ""]
     },
+
     "battery": {
         "states": {
             // "good": 95,
@@ -46,15 +69,24 @@
         "format-alt": "<span font='Font Awesome 6 Free Solid'>{icon}</span> {time}",
         "format-icons": ["", "", "", "", ""]
     },
+
     "battery#bat2": {
         "bat": "BAT2"
     },
+
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "<span font='Font Awesome 6 Free Solid'></span> {:%H:%M}",
         "format-alt": " {:%d-%m-%Y}"
     },
+
     "tray": {
         "spacing": 10
+    },
+
+    "custom/power": {
+        "format": "  ",
+        "tooltip": false,
+        "on-click": "archlinux-logout",
     },
 }

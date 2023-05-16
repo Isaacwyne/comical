@@ -27,6 +27,10 @@ map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
+-- nvim-tree
+map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
+map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>")
+
 -- better indenting (without leaving visual mode)
 map("v", "<", "<gv")
 map("v", ">", ">gv")
@@ -42,6 +46,9 @@ map("n", "<leader>fo", "<cmd>Telescope find_files<cr>", { silent = true })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { silent = true })
 map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { silent = true })
 map("n", "<leader>ht", "<cmd>Telescope help_tags<cr>", { silent = true })
+
+-- mason
+map("n", "<leader>cm", "<cmd>Mason<cr>", { silent = true })
 
 -- Terminal
 map("t", "<Esc>", "<C-\\><C-n>", { silent = true })

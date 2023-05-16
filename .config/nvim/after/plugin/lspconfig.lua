@@ -5,11 +5,28 @@ end
 
 local mason = require("mason")
 mason.setup({
+  ensure_installed = {
+    "lua-language-server",
+    "bash-language-server",
+    "python-lsp-server"
+  },
+
   ui = {
     icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗"
+      package_pending = " ",
+      package_installed = "󰄳 ",
+      package_uninstalled = " 󰚌",
+    },
+
+    keymaps = {
+      toggle_server_expand = "<CR>",
+      install_server = "i",
+      update_server = "u",
+      check_server_version = "c",
+      update_all_servers = "U",
+      check_outdated_servers = "C",
+      uninstall_server = "X",
+      cancel_installation = "<C-c>",
     },
   },
 })
@@ -121,6 +138,31 @@ lspconfig.lua_ls.setup {
       -- don't send telemetry data containing a randomized but unique identifier
       telemetry = {
         enable = false,
+      },
+    },
+  },
+}
+
+-- bash (scripts)
+lspconfig.bashls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)"
+    },
+  },
+}
+
+-- python
+lspconfig.pylsp.setup {
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'},
+          maxLineLength = 100
+        },
       },
     },
   },

@@ -12,7 +12,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  "kyazdani42/nvim-web-devicons",
+  -- "kyazdani42/nvim-web-devicons",
+  "akinsho/bufferline.nvim",
   "windwp/nvim-autopairs",
   "navarasu/onedark.nvim",
   "numToStr/Comment.nvim",
@@ -32,6 +33,15 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate"
+  },
+
+  -- nvim-tree
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons"
+    },
   },
 
   -- lsp
@@ -55,6 +65,51 @@ local plugins = {
   }
 }
 
-local opts = {}
+local opts = {
+  defaults = { lazy = true },
+
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
+
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "tohtml",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwPlugin",
+        "netrwSettings",
+        "netrwFileHandlers",
+        "matchit",
+        "tar",
+        "tarPlugin",
+        "rrhelper",
+        "spellfile_plugin",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
+        "tutor",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
+      },
+    },
+  },
+}
 
 require("lazy").setup(plugins, opts)

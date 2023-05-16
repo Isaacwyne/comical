@@ -35,7 +35,9 @@ window#waybar.chromium {
     background: rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 0px #ffffff;
 }
-#workspaces button.focused {
+/* this doesn't work on hyprland */
+/* #workspaces button.focused { */
+#workspaces button.active {
     background-color: #64727D;
     box-shadow: inset 0 0px #ffffff;
 }
@@ -56,12 +58,12 @@ window#waybar.chromium {
 }
 
 #window,
-#worspaces {
+#workspaces {
     margin: 0 4px;
 }
 
 /* if workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > # workspaces {
+.modules-left > widget:first-child > #workspaces {
     margin-left: 0;
 }
 /* If workspaces is the rightmost module, omit right margin */

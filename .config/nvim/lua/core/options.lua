@@ -89,25 +89,25 @@ for _, provider in ipairs(default_providers) do
   vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
-local default_plugins = {
-  "gzip",
-  "zip",
-  "zipPlugin",
-  "tar",
-  "tarPlugin",
-  "getscript",
-  "getscriptPlugin",
-  "vimball",
-  "vimballPlugin",
-  "2html_plugin",
-  "matchit",
-  "matchparen",
-  "logiPat",
-  "rrhelper",
-}
-for _, plugin in pairs(default_plugins) do
-  vim.g["loaded_" .. plugin] = 1
-end
+-- local default_plugins = {
+--   "gzip",
+--   "zip",
+--   "zipPlugin",
+--   "tar",
+--   "tarPlugin",
+--   "getscript",
+--   "getscriptPlugin",
+--   "vimball",
+--   "vimballPlugin",
+--   "2html_plugin",
+--   "matchit",
+--   "matchparen",
+--   "logiPat",
+--   "rrhelper",
+-- }
+-- for _, plugin in pairs(default_plugins) do
+--   vim.g["loaded_" .. plugin] = 1
+-- end
 
 -- fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

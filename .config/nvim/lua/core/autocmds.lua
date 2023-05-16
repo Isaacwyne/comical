@@ -4,6 +4,20 @@ local augroup = function(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
+-- check if we need to reload the file when it's changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  command = "checktime",
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_splits"),
+  callback = function ()
+    vim.cmd("tabdo wincmd =")
+  end,
+})
+
 -- highlight on yank
 autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
