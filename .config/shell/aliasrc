@@ -94,4 +94,8 @@ ffvid() {
     fi
 }
 
+ffcut() {
+    ffmpeg -i $1 -ss $3 -to $4 -c:a copy $2
+}
+
 # vim:ft=bash
