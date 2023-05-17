@@ -12,7 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  -- "kyazdani42/nvim-web-devicons",
   "akinsho/bufferline.nvim",
   "windwp/nvim-autopairs",
   "navarasu/onedark.nvim",
@@ -37,10 +36,11 @@ local plugins = {
 
   -- nvim-tree
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
     dependencies = {
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
     },
   },
 

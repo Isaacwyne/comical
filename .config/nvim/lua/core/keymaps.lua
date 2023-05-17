@@ -28,8 +28,8 @@ map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
 -- nvim-tree
-map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
-map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>")
+-- map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
+-- map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>")
 
 -- better indenting (without leaving visual mode)
 map("v", "<", "<gv")
