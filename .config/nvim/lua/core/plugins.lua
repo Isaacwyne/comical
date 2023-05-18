@@ -20,7 +20,7 @@ local plugins = {
       fast_wrap = {},
       disable_filetype = { "TelescopePrompt", "vim" },
     },
-    config = function (_, opts)
+    config = function(_, opts)
       require("nvim-autopairs").setup(opts)
 
       --setup cmp for autopairs
@@ -32,7 +32,26 @@ local plugins = {
   "navarasu/onedark.nvim",
   "numToStr/Comment.nvim",
   "nvim-lualine/lualine.nvim",
-  "lukas-reineke/indent-blankline.nvim",
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      -- char = "▏",
+      char = "│",
+      filetype_exclude = {
+        "help",
+        "alpha",
+        "dashboard",
+        "neo-tree",
+        "Trouble",
+        "lazy",
+        "mason"
+      },
+      show_trailing_blankline_indent = false,
+      show_current_context = false,
+    },
+  },
   -- gitsigns
   "lewis6991/gitsigns.nvim",
 
@@ -54,7 +73,7 @@ local plugins = {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      { "nvim-tree/nvim-web-devicons", lazy = true },
       "MunifTanjim/nui.nvim",
     },
   },
