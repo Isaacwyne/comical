@@ -1,50 +1,37 @@
 local present, neotree = pcall(require, "neo-tree")
-
 if not present then
   return
 end
 
-local options = {
-  deactivate = function()
-    vim.g.neo_tree_remove_legacy_commands = 1
-    if vim.fn.argc() == 1 then
-      local stat = vim.loop.fs_stat(vim.fn.argv(0))
-      if stat and stat.type == "directory" then
-        require("neo-tree")
-      end
-    end
+neotree.setup({
+  cmd = "Neotree",
+  init = function()
+    vim.g.neo_tree_remove_legacy_commands = true
   end,
   opts = {
-    filesystem = {
-      bind_to_cwd = false,
-      follow_current_file = true,
-      use_libuv_file_watcher = true,
-    },
+    auto_clean_after_session_restore = true,
+    close_if_last_window = true,
+    sources = { "filesystem", "buffers", "git_status" },
     window = {
       mappings = {
-        ["<space>"] = "none",
+        ["<space>"] = false,
+      },
+    },
+    filesystem = {
+      follow_current_file = true,
+      hijack_netrw_behavior = "open_current",
+      use_libuv_file_watcher = true,
+    },
+    event_handlers = {
+      {
+        event = "neo_tree_buffer_enter",
+        handler = function(_)
+          vim.opt_local.signcolumn = "auto"
+        end,
       },
     },
     default_component_configs = {
-      indent = {
-        with_expanders = true,      -- if nil and file nesting is enabled, will enable expanders
-        expander_collapsed = "",
-        expander_expanded = "",
-        expander_highlight = "NeoTreeExpander",
-      },
+      indent = { padding = 0, indent_size = 1 },
     },
   },
-  config = function(_, opts)
-    require("neo-tree").setup(opts)
-    vim.api.nvim_create_autocmd("TermClose", {
-      pattern = "*lazygit",
-      callback = function()
-        if package.loaded["neo-tree.sources.git_status"] then
-          require("neo-tree.sources.git_status").refresh()
-        end
-      end
-    })
-  end,
-}
-
-neotree.setup(options)
+})
