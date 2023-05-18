@@ -7,6 +7,20 @@ local ok, lspkind = pcall(require, "lspkind")
 if not ok then
   return
 end
+require('luasnip.loaders.from_vscode').lazy_load()
+
+local border = function(hl_name)
+  return {
+    { "╭", hl_name },
+    { "─", hl_name },
+    { "╮", hl_name },
+    { "│", hl_name },
+    { "╯", hl_name },
+    { "─", hl_name },
+    { "╰", hl_name },
+    { "│", hl_name },
+  }
+end
 
 cmp.setup {
   mapping = cmp.mapping.preset.insert({
@@ -23,6 +37,17 @@ cmp.setup {
     { name = "path" },
     { name = "luasnip" },
     { name = "buffer", keyword_length = 5 },
+  },
+
+  window = {
+    completion = {
+      winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
+      scrollbar = false,
+    },
+    documentation = {
+      border = border "CmpDocBorder",
+      winhighlight = "Normal:CmpDoc",
+    },
   },
 
   snippet = {

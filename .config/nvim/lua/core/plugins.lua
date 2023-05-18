@@ -13,7 +13,22 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   "akinsho/bufferline.nvim",
-  "windwp/nvim-autopairs",
+
+  {
+    "windwp/nvim-autopairs",
+    opts = {
+      fast_wrap = {},
+      disable_filetype = { "TelescopePrompt", "vim" },
+    },
+    config = function (_, opts)
+      require("nvim-autopairs").setup(opts)
+
+      --setup cmp for autopairs
+      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
+  },
+
   "navarasu/onedark.nvim",
   "numToStr/Comment.nvim",
   "nvim-lualine/lualine.nvim",
@@ -25,7 +40,7 @@ local plugins = {
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.1',
-    dependencies = { {'nvim-lua/plenary.nvim'} }
+    dependencies = { { 'nvim-lua/plenary.nvim' } }
   },
 
   -- treesitter
@@ -48,25 +63,27 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      {"williamboman/mason.nvim"},
-      {"onsails/lspkind.nvim"},
+      { "williamboman/mason.nvim" },
+      { "onsails/lspkind.nvim" },
 
       -- autocompletion
-      {"hrsh7th/nvim-cmp"},
-      {"hrsh7th/cmp-nvim-lua"},
-      {"hrsh7th/cmp-nvim-lsp"},
-      {"hrsh7th/cmp-buffer"},
-      {"hrsh7th/cmp-path"},
+      { "hrsh7th/nvim-cmp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
 
       -- Snippets
-      {'L3MON4D3/LuaSnip'},
-      {'rafamadriz/friendly-snippets'},
+      {
+        "L3MON4D3/LuaSnip",
+        dependencies = { "rafamadriz/friendly-snippets" },
+      }
     },
   }
 }
 
 local opts = {
-  defaults = { lazy = true },
+  -- defaults = { lazy = true },
 
   ui = {
     icons = {

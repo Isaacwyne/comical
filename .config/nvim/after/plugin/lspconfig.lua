@@ -3,7 +3,11 @@ if not present then
   return
 end
 
-local mason = require("mason")
+local ok, mason = pcall(require, "mason")
+if not ok then
+  return
+end
+
 mason.setup({
   ensure_installed = {
     "lua-language-server",
@@ -72,10 +76,10 @@ capabilities.textDocument.completion.completionItem = {
 }
 
 local signs = {
-  Error = '✘',
-  Warn = '',
-  Hint = '',
-  Info = ''
+  Error = " ",
+  Warn = " ",
+  Hint = " ",
+  Info = " ",
 }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
@@ -120,24 +124,17 @@ lspconfig.lua_ls.setup {
   capabilities = capabilities,
   settings = {
     Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = vim.split(package.path, ";"),
-      },
       diagnostics = {
-        -- get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { "vim" },
       },
       workspace = {
-        -- make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-        checkThirdParty = false,
-      },
-      maxPreload = 100000,
-      preloadFileSize = 10000,
-      -- don't send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
+        library = {
+          [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+          [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true
+        },
+        maxPreload = 100000,
+        preloadFileSize = 10000,
       },
     },
   },

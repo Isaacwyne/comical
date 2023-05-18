@@ -1,10 +1,10 @@
 -- functional wrapper for keymaps
-local map = function (mode, lhs, rhs, opts)
+local map = function (mode, keymap, cmd, opts)
   local options = { noremap = true }
   if opts then
     options = vim.tbl_extend("force", options, opts)
   end
-  vim.keymap.set(mode, lhs, rhs, options)
+  vim.keymap.set(mode, keymap, cmd, options)
 end
 
 -- better up/down navigation
@@ -27,28 +27,38 @@ map("n", "J", "mzJ`z")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 
--- nvim-tree
--- map("n", "<C-n>", "<cmd>NvimTreeToggle<cr>")
--- map("n", "<leader>e", "<cmd>NvimTreeFocus<cr>")
+-- NeoTree
+map("n", "<leader>e", "<cmd>Neotree toggle<cr>")
+map("n", "<leader>o", function()
+  if vim.bo.filetype == "neo-tree" then
+    vim.cmd.wincmd "p"
+  else
+    vim.cmd.Neotree "focus"
+  end
+end)
 
 -- better indenting (without leaving visual mode)
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
 -- windows
-map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
-map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
-map("n", "<leader>\\", "<C-W>v", { desc = "Split window right" })
+map("n", "<leader>ww", "<C-W>p")
+map("n", "<leader>wd", "<C-W>c")
+map("n", "<leader>-", "<C-W>s")
+map("n", "<leader>\\", "<C-W>v")
 
 -- Telescope
-map("n", "<leader>fo", "<cmd>Telescope find_files<cr>", { silent = true })
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { silent = true })
+map("n", "<leader>fa", "<cmd>Telescope find_files follow=true no_ignore=true hidden=true <cr>", { silent = true })
+map("n", "<leader>fw", "<cmd>Telescope live_grep <cr>", { silent = true })
 map("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { silent = true })
-map("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { silent = true })
-map("n", "<leader>ht", "<cmd>Telescope help_tags<cr>", { silent = true })
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { silent = true })
+map("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { silent = true })
+map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find <cr>", { silent = true })
+-- using telescope with git
+map("n", "<leader>cm", "<cmd>Telescope git_commits <cr>", { silent = true })
+map("n", "<leader>gt", "<cmd>Telescope git status <cr>", { silent = true })
 
--- mason
-map("n", "<leader>cm", "<cmd>Mason<cr>", { silent = true })
-
--- Terminal
-map("t", "<Esc>", "<C-\\><C-n>", { silent = true })
+-- package manager (language servers)
+map("n", "<leader>pm", "<cmd>Mason<cr>")
+map("n", "<leader>pM", "<cmd>MasonUpdateAll<cr>")
