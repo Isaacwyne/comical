@@ -15,6 +15,14 @@ local plugins = {
   "akinsho/bufferline.nvim",
 
   {
+    "folke/which-key.nvim",
+    keys = { "<leader>", '"', "'", "`", "c", "v" },
+    config = function (_, opts)
+      require("which-key").setup(opts)
+    end,
+  },
+
+  {
     "windwp/nvim-autopairs",
     opts = {
       fast_wrap = {},
@@ -52,6 +60,13 @@ local plugins = {
       show_current_context = false,
     },
   },
+  -- surround
+  {
+    "echasnovski/mini.surround",
+    config = function()
+      require('mini.surround').setup()
+    end
+  },
   -- gitsigns
   "lewis6991/gitsigns.nvim",
 
@@ -65,7 +80,30 @@ local plugins = {
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        init = function()
+          local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
+          local opts = require("lazy.core.plugin").values(plugin, "opts", false)
+          local enabled = false
+          if opts.textobjects then
+            for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" })
+            do
+              if opts.textobjects[mod] and opts.textobjects[mod].enable then
+                enabled = true
+                break
+              end
+            end
+          end
+          if not enabled then
+            require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
+          end
+        end,
+      },
+    }
   },
 
   -- nvim-tree
@@ -83,6 +121,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
       { "onsails/lspkind.nvim" },
 
       -- autocompletion

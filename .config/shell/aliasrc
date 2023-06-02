@@ -12,6 +12,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # changing 'ls' to 'lsd'
+alias ls=lsd
 alias l='ls -lh'
 alias ll='ls -lAh'
 alias la='ls -A'
@@ -68,7 +69,7 @@ vo() {
 }
 
 yta() {
-    yt-dlp --extract-audio --audio-format mp3 --audio-quality 10 -o '~/Music/%(title)s.%(ext)s' $@
+    yt-dlp --extract-audio --audio-format mp3 -o '~/Music/%(title)s.%(ext)s' $@
 }
 
 ytv() {
@@ -96,6 +97,31 @@ ffvid() {
 
 ffcut() {
     ffmpeg -i $1 -ss $3 -to $4 -c:a copy $2
+}
+
+# FZF
+# change the default completion "path" to only complete files, and not files and dirs
+_fzf_compgen_path() {
+    rg --files --glob "!.git" . "$1"
+}
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+_fzf_complete_git() {
+    _fzf_complete -- "$@" < <(
+        git --help -a | grep -E '^\s+' | awk '{print $1}'
+    )
+}
+_fzf_comprun() {
+    local command=$1
+    shift
+
+    case "$command" in
+        git)
+            _fzf_complete_git ;;
+        *)
+            fzf "$@" ;;
+    esac
 }
 
 # vim:ft=bash

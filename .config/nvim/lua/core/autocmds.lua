@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),
-  callback = function ()
+  callback = function()
     vim.cmd("tabdo wincmd =")
   end,
 })
@@ -85,8 +85,17 @@ autocmd("Filetype", {
 -- terminal options
 autocmd("TermOpen", {
   group = augroup("terminal_opts"),
-  callback = function ()
+  callback = function()
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
   end
+})
+
+-- make mason floating windows transparent
+autocmd("Filetype", {
+  group = augroup("mason_transparent"),
+  pattern = "mason",
+  callback = function ()
+    vim.opt_local.winblend = 10
+  end,
 })

@@ -4,7 +4,6 @@ vim.g.maplocalleader = " "
 local opt = vim.opt
 
 local options = {
-  guicursor = "",
   conceallevel = 3,
   -- confirm = true,
   cursorline = true,

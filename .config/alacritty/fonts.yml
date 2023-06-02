@@ -3,25 +3,26 @@
 font:
   # Normal (roman) font face
   normal:
-    family: "Monofur Nerd Font"
+    # family: "Monofur Nerd Font"
+    family: "FantasqueSansM Nerd Font"
     style: Regular
 
   # Bold font face
   bold:
-    # family: "Monofurbold Nerd Font"
-    family: "Monofur Nerd Font"
+    # family: "Monofur Nerd Font"
+    family: "FantasqueSansM Nerd Font"
     style: Bold
 
   # Italic font face
   italic:
-    # family: "Monofuritalic Nerd Font"
-    family: "Monofur Nerd Font"
+    # family: "Monofur Nerd Font"
+    family: "FantasqueSansM Nerd Font"
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    # family: "Monofurbold Nerd Font"
-    family: "Monofur Nerd Font"
+    # family: "Monofur Nerd Font"
+    family: "FantasqueSansM Nerd Font"
     style: Bold Italic
 
   # Point size

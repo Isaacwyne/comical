@@ -9,12 +9,6 @@ if not ok then
 end
 
 mason.setup({
-  ensure_installed = {
-    "lua-language-server",
-    "bash-language-server",
-    "python-lsp-server"
-  },
-
   ui = {
     icons = {
       package_pending = " ",
@@ -35,24 +29,40 @@ mason.setup({
   },
 })
 
-local on_attach = function(client, bufnr)
-  local keymap = vim.keymap.set
-  local bufopts = { buffer = bufnr, remap = false }
+require("mason-lspconfig").setup {
+  ensure_installed = {
+    "lua_ls",
+    "bashls",
+    "pylsp"
+  },
+  automatic_installation = true
+}
 
-  keymap("n", "gd", vim.lsp.buf.definition, bufopts)
-  keymap("n", "K", vim.lsp.buf.hover, bufopts)
-  keymap("n", "ga", vim.lsp.buf.code_action, bufopts)
-  keymap("n", "gD", vim.lsp.buf.declaration, bufopts)
-  keymap("n", "gT", vim.lsp.buf.type_definition, bufopts)
-  keymap("n", "gi", vim.lsp.buf.implementation, bufopts)
-  keymap("n", "gr", vim.lsp.buf.references, bufopts)
-  keymap("n", "<leader>dn", vim.diagnostic.goto_next, bufopts)
-  keymap("n", "<leader>dp", vim.diagnostic.goto_prev, bufopts)
-  keymap("n", "<leader>r", vim.lsp.buf.rename, bufopts)
-  keymap("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", bufopts)
+local on_attach = function(client, bufnr)
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
+
+  local keymap = vim.keymap.set
+  -- local bufopts = { buffer = bufnr, remap = false }
+
+  keymap("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "LSP definition" })
+  keymap("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP hover" })
+  keymap("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr, desc = "LSP code action"})
+  keymap("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "LSP declaration" })
+  keymap("n", "gT", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "LSP definition type" })
+  keymap("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "LSP implementation" })
+  keymap("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "LSP references" })
+  keymap("n", "<leader>dn", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Goto next"})
+  keymap("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Goto prev" })
+  keymap("n", "<leader>r", vim.lsp.buf.rename, { buffer = bufnr, desc = "raname" })
+  -- keymap("n", "<leader>ld", "<cmd>Telescope diagnostics<cr>", { buffer = bufnr, desc = "Line diagnostics" })
+  keymap("n", "<leader>ld", vim.diagnostic.open_float, { buffer = bufnr, desc = "Line diagnostics" })
+  --[[ keymap("n", "<leader>ld", function ()
+    vim.diagnostic.open_float({ border = "rounded" })
+  end, { buffer = bufnr, desc = "Line Diagnostics" }) ]]
   keymap("n", "<leader>lf", function()
     vim.lsp.buf.format({ async = true })
-  end, bufopts)
+  end, { buffer = bufnr, desc = "LSP formatting" })
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
