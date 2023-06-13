@@ -14,7 +14,7 @@ set scroll-step 100
 
 #zoom settings
 set zoom-min 10
-set guioptions ""
+# set guioptions ""
 map K zoom in
 map J zoom out
 
@@ -38,3 +38,4 @@ map J zoom out
 map i recolor
 map p print
 map g goto top
+map S toggle_statusbar
