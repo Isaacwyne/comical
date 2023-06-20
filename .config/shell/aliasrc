@@ -34,6 +34,7 @@ alias cat='bat'
 alias vv='vimv'
 alias cat='bat'
 alias vim='nvim'
+alias lf='lfub'
 alias bconf="nvim ~/.bashrc"
 alias zconf="nvim ~/.config/zsh/.zshrc"
 
