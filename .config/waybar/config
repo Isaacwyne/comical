@@ -10,17 +10,14 @@
         "all-outputs": true,
         // "sort-by-number": true,
         "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "focused": "",
-            "default": ""
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "󱔘",
+            "6": "",
+            "7": "󰕼",
+            "8": "",
         },
     },
 
@@ -45,11 +42,9 @@
     },
 
     "network": {
-        "format-wifi": "<span font='Font Awesome 6 Free Solid'></span> {essid} ({signalStrength}%)",
-        "format-ethernet": "󰈀 {ifname}: {ipaddr}/{cidr}",
-        "format-linked": " {ifname} (No IP)",
-        "format-disconnected": "Disconnected",
-        "format-alt": "{ifname}: {ipaddr}"
+        "format-wifi": " {signalStrength}%",
+        "format-ethernet": " wired",
+        "format-disconnected": "",
     },
 
     "backlight": {
