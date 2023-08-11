@@ -1,0 +1,45 @@
+# prettify
+set colored-stats On
+set visible-stats On
+set mark-symlinked-directories On
+set colored-completion-prefix On
+set menu-complete-display-prefix On
+
+set enable-bracketed-paste on
+
+# completion settings
+set show-all-if-ambiguous on
+set completion-display-width 0
+set completion-query-items 1000
+# ignore upper & lowercase when tab completing
+set completion-ignore-case on
+
+# ^C nolonger shows on C-c keypress
+set echo-control-characters off
+
+# command history search
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Bash keybindings
+"\es": "\C-asudo \C-e"
+
+# move forward/backward by word
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+set editing-mode vi
+set show-mode-in-prompt on
+
+$if mode=vi
+    # bind substring history commands to j and k on vi's command mode
+    set keymap vi-command
+    "k": history-substring-search-backward
+    "j": history-substring-search-forward
+
+    set keymap vi-insert
+    "\C-l": clear-screen
+    "\e.": yank-last-arg
+    "\C-p": previous-history
+    "\C-n": next-history
+$endif
