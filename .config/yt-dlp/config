@@ -6,4 +6,4 @@
 --output '%(title)s.%(ext)s'
 --concurrent-fragments 5
 --merge-output-format mp4
---ffmpeg-location ~/Downloads/ffmpeg-ytdlp/bin/
+--ffmpeg-location ~/downloads/ffmpeg-ytdlp/bin/

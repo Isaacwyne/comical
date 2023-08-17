@@ -24,6 +24,7 @@ alias df='df -h'
 alias du='du -h'
 alias cp='cp -iv'
 alias mv='mv -i'
+alias r='ranger'
 alias mkdir='mkdir -p'
 alias free='free -m'
 alias ping='ping -c 4'
@@ -34,7 +35,7 @@ alias cat='bat'
 alias vv='vimv'
 alias cat='bat'
 alias vim='nvim'
-alias lf='lfub'
+# alias lf='lfub'
 alias bconf="nvim ~/.bashrc"
 alias zconf="nvim ~/.config/zsh/.zshrc"
 
@@ -49,81 +50,10 @@ alias addall='git add --all'
 alias commit='git commit'
 alias status='git status'
 
-## FUNCTIONS  -------------------------------------- ##
-function ranger {
-    local IFS=$'\t\n'
-    local tempfile="$(mktemp -t tmp.XXXXXX)"
-    local ranger_cmd=(
-        command
-        ranger
-        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
-    )
+# pacman
+alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
 
-    ${ranger_cmd[@]} "$@"
-    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
-        cd -- "$(cat "$tempfile")" || return
-    fi
-    command rm -f -- "$tempfile" 2>/dev/null
-}
-
-vo() {
-    vim $(which $1)
-}
-
-yta() {
-    yt-dlp --extract-audio --audio-format mp3 -o '~/Music/%(title)s.%(ext)s' $@
-}
-
-ytv() {
-        yt-dlp $@
-}
-
-# FZF
-fo() {
-    IFS=$'\n' out=("$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)")
-    key=$(head -1 <<< "$out")
-    file=$(head -2 <<< "$out" | tail -1)
-    if [ -n "$file" ]; then
-        [ "$key" = ctrl-o ] && xdg-open "$file" || ${EDITOR:-vim} "$file"
-    fi
-}
-
-ffvid() {
-    if [ -n "$1" ]; then
-        vid="$1"
-        ffmpeg -i "$vid" -f mp3 -vn -ac 2 "${vid%.*}.mp3"
-    else
-        echo "Please supply a video file"
-    fi
-}
-
-ffcut() {
-    ffmpeg -i $1 -ss $3 -to $4 -c:a copy $2
-}
-
-# FZF
-# change the default completion "path" to only complete files, and not files and dirs
-_fzf_compgen_path() {
-    rg --files --glob "!.git" . "$1"
-}
-_fzf_compgen_dir() {
-    fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-_fzf_complete_git() {
-    _fzf_complete -- "$@" < <(
-        git --help -a | grep -E '^\s+' | awk '{print $1}'
-    )
-}
-_fzf_comprun() {
-    local command=$1
-    shift
-
-    case "$command" in
-        git)
-            _fzf_complete_git ;;
-        *)
-            fzf "$@" ;;
-    esac
-}
+alias tldrf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-window=right,70% | xargs tldr'
+alias battery='bat --plain /sys/class/power_supply/BAT0/capacity'
 
 # vim:ft=bash
