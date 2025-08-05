@@ -1,3 +1,3 @@
 yay -S --noconfirm --needed \
-  spotify obsidian-bin typora \
-  libreoffice
+  spotify typora \
+  libreoffice jq wordnet-common
